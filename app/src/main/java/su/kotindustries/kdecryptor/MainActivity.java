@@ -15,6 +15,7 @@ public class MainActivity extends Activity
 	Button btnFind;
 	EditText edtOut;
 	ProgressBar pbRolling;
+	TextView txtOut;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,7 +26,8 @@ public class MainActivity extends Activity
 		btnFind = findViewById(R.id.btnFind);
 		edtOut = findViewById(R.id.edtOut);
 		pbRolling = findViewById(R.id.pbRolling);
-    }
+		txtOut = findViewById(R.id.txtOut);
+	}
 	
 	public void onClick(View v){
 		String sMask = edtIn.getText().toString();
@@ -37,7 +39,7 @@ public class MainActivity extends Activity
 		}
 	}
 	
-	class AsyncFinder extends AsyncTask<String, Integer, ArrayList<String>>
+	class AsyncFinder extends AsyncTask<String, String, ArrayList<String>>
 	{
 		@Override
 		protected ArrayList<String> doInBackground(String[] params)
@@ -59,6 +61,7 @@ public class MainActivity extends Activity
 			edtOut.setVisibility(View.VISIBLE);
 			pbRolling.setVisibility(View.GONE);
 		}
+		
 	}
 }
 

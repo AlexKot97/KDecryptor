@@ -23,15 +23,18 @@
 			android:text="Найти"
 			android:id="@+id/btnFind"
 			android:onClick="onClick"/>
-
 		<ProgressBar
 			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
 			android:layout_toRightOf="@id/btnFind"
-			android:visibility="invisible"
 			android:id="@+id/pbRolling"/>
-
+		
 	</RelativeLayout>
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:id="@+id/txtOut"/>
 
 	<RelativeLayout
 		android:layout_height="match_parent"
