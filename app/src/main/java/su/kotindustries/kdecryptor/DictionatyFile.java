@@ -5,9 +5,11 @@ import java.io.*;
 public class DictionatyFile
 {
 	private String pFileName;
+	
 	public DictionatyFile(String sFileName){
 		pFileName = sFileName;
 	}
+	
 	public void foreachAllLines(WordFinder iter){
 		String sFilePath = Environment.getExternalStorageDirectory().getAbsolutePath();
 		String sFileName = sFilePath + "/dictionaries/" + pFileName;

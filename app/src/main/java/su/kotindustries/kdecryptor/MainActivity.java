@@ -28,11 +28,39 @@ public class MainActivity extends Activity
 	public void onClick(View v){
 		String sMask = edtIn.getText().toString();
 		if (sMask != ""){
-			WordFinder wfSingle = new WordFinder(sMask);
+		
+			new AsyncFinder().execute(sMask);
+			// вынести в поток
+			
+			
+			
+			
+			
+			
+			// todo edtOut.setText("Обнаружено совпадений: " + String.valueOf(iCount));
+			
+		}
+	}
+	
+	class AsyncFinder extends AsyncTask<String, Integer, ArrayList<String>>
+	{
+
+		@Override
+		protected ArrayList<String> doInBackground(String[] params)
+		{
+	 		WordFinder wfSingle = new WordFinder(params[0]);
 			DictionatyFile dfDictionary = new DictionatyFile("rus.txt");
 			dfDictionary.foreachAllLines(wfSingle);
-			edtOut.setText("Обнаружено совпадений: " + String.valueOf(wfSingle.getCount()));
-			for (String sLine : wfSingle.getResult())
+			// Todo: int iCount = wfSingle.getCount();
+			ArrayList<String> alsResult = wfSingle.getResult();
+			return alsResult;
+		}
+
+		@Override
+		protected void onPostExecute(ArrayList<String> alsResult)
+		{
+			super.onPostExecute(alsResult);
+			for (String sLine : alsResult)
 				edtOut.append("\n" + sLine);
 		}
 	}
