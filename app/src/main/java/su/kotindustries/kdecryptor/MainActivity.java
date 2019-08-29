@@ -14,6 +14,7 @@ public class MainActivity extends Activity
 	EditText edtIn;
 	Button btnFind;
 	EditText edtOut;
+	ProgressBar pbRolling;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,28 +24,21 @@ public class MainActivity extends Activity
 		edtIn = findViewById(R.id.edtIn);
 		btnFind = findViewById(R.id.btnFind);
 		edtOut = findViewById(R.id.edtOut);
+		pbRolling = findViewById(R.id.pbRolling);
     }
 	
 	public void onClick(View v){
 		String sMask = edtIn.getText().toString();
 		if (sMask != ""){
-		
 			new AsyncFinder().execute(sMask);
-			// вынести в поток
-			
-			
-			
-			
-			
-			
-			// todo edtOut.setText("Обнаружено совпадений: " + String.valueOf(iCount));
-			
+			edtOut.setVisibility(View.GONE);
+			pbRolling.setVisibility(View.VISIBLE);
+			// todo edtOut.setText("Обнаружено совпадений: " + String.valueOf(iCount);
 		}
 	}
 	
 	class AsyncFinder extends AsyncTask<String, Integer, ArrayList<String>>
 	{
-
 		@Override
 		protected ArrayList<String> doInBackground(String[] params)
 		{
@@ -62,6 +56,8 @@ public class MainActivity extends Activity
 			super.onPostExecute(alsResult);
 			for (String sLine : alsResult)
 				edtOut.append("\n" + sLine);
+			edtOut.setVisibility(View.VISIBLE);
+			pbRolling.setVisibility(View.GONE);
 		}
 	}
 }
